@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟农田 - 绿韵农创集萃园</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .virtual-farm {
+            padding-top: 80px;
+        }
+
+        .farm-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #2c5530, #3a7340);
+            padding: 60px 20px;
+            border-radius: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .farm-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('imgs/pattern.png') repeat;
+            opacity: 0.1;
+        }
+
+        .farm-header h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .farm-header p {
+            font-size: 18px;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .monitor-status {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: -20px auto 40px;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 15px;
+            background: rgba(44, 85, 48, 0.1);
+        }
+
+        .status-badge.online i {
+            color: #52c41a;
+        }
+
+        .last-update {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+
+        .farm-dashboard {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .live-monitor, .env-data {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .live-monitor h2, .env-data h2 {
+            color: #2c5530;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .monitor-screen {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .monitor-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .monitor-screen::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .data-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #2c5530;
+        }
+
+        .data-card i {
+            font-size: 28px;
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+
+        .data-card h3 {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .data-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5530;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            background: rgba(82, 196, 26, 0.1);
+            color: #52c41a;
+        }
+
+        .status.warning {
+            background: rgba(250, 173, 20, 0.1);
+            color: #faad14;
+        }
+
+        .farm-controls {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .farm-controls h2 {
+            color: #2c5530;
+            font-size: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .control-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .control-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #2c5530;
+        }
+
+        .control-card i {
+            font-size: 32px;
+            color: #2c5530;
+            margin-bottom: 15px;
+        }
+
+        .control-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            margin-top: 15px;
+            padding: 10px 25px;
+            border: none;
+            background: #2c5530;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .control-btn:hover:not([disabled]) {
+            background: #234426;
+            transform: translateY(-2px);
+        }
+
+        .control-btn[disabled] {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .farm-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .monitor-screen {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .farm-header {
+                padding: 40px 20px;
+            }
+
+            .farm-header h1 {
+                font-size: 28px;
+            }
+
+            .monitor-status {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .monitor-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            perspective: 1000px;
+        }
+
+        .monitor-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all 0.8s ease;
+            transform-style: preserve-3d;
+            transform: rotateY(90deg) translateZ(100px);
+            backface-visibility: hidden;
+            object-fit: cover;
+        }
+
+        .monitor-slide.active {
+            opacity: 1;
+            transform: rotateY(0) translateZ(0);
+        }
+
+        .monitor-slide.exit {
+            opacity: 0;
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .monitor-screen:hover .monitor-slide.active {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .monitor-slide:first-child {
+            animation: smartFarmPulse 2s infinite alternate;
+        }
+
+        @keyframes smartFarmPulse {
+            0% {
+                filter: brightness(1);
+                transform: rotateY(0) translateZ(0) scale(1);
+            }
+            100% {
+                filter: brightness(1.1);
+                transform: rotateY(3deg) translateZ(10px) scale(1.02);
+            }
+        }
+
+        .monitor-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            z-index: 2;
+            transform: translateZ(50px);
+            transition: all 0.3s ease;
+        }
+
+        .monitor-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .monitor-location {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .monitor-time {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .monitor-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .monitor-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .monitor-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .monitor-indicators {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .monitor-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .monitor-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .farm-gallery {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .farm-gallery .section-title {
+            color: #2c5530;
+            font-size: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .farm-gallery .section-title i {
+            font-size: 24px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            perspective: 2000px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.8s ease;
+        }
+
+        /* 智慧农业示范区特效 */
+        .gallery-item:nth-child(1) {
+            animation: smartFarmRotate 15s infinite linear;
+        }
+
+        @keyframes smartFarmRotate {
+            0% {
+                transform: rotateY(0) translateZ(0);
+            }
+            100% {
+                transform: rotateY(360deg) translateZ(0);
+            }
+        }
+
+        /* 有机蔬菜种植区特效 */
+        .gallery-item:nth-child(2) {
+            animation: organicGrow 4s infinite alternate;
+        }
+
+        @keyframes organicGrow {
+            0% {
+                transform: scale(1) rotateX(0);
+            }
+            100% {
+                transform: scale(1.05) rotateX(10deg);
+            }
+        }
+
+        /* 果树种植区特效 */
+        .gallery-item:nth-child(3) {
+            animation: fruitTreeSway 6s infinite ease-in-out;
+        }
+
+        @keyframes fruitTreeSway {
+            0%, 100% {
+                transform: rotateZ(-2deg);
+            }
+            50% {
+                transform: rotateZ(2deg);
+            }
+        }
+
+        /* 生态养殖区特效 */
+        .gallery-item:nth-child(4) {
+            animation: ecoFarmPulse 4s infinite alternate;
+        }
+
+        @keyframes ecoFarmPulse {
+            0% {
+                transform: translateZ(0) scale(1);
+                filter: brightness(1);
+            }
+            100% {
+                transform: translateZ(50px) scale(1.03);
+                filter: brightness(1.2);
+            }
+        }
+
+        /* 农业科技展示区特效 */
+        .gallery-item:nth-child(5) {
+            animation: techShowcase 8s infinite linear;
+        }
+
+        @keyframes techShowcase {
+            0% {
+                transform: rotateY(0) translateZ(0);
+                filter: saturate(1);
+            }
+            50% {
+                transform: rotateY(180deg) translateZ(30px);
+                filter: saturate(1.3);
+            }
+            100% {
+                transform: rotateY(360deg) translateZ(0);
+                filter: saturate(1);
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .gallery-item:hover {
+            transform: translateZ(50px) scale(1.1);
+            box-shadow: 0 25px 35px rgba(0,0,0,0.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100%) translateZ(30px);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0) translateZ(30px);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .gallery-overlay p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                perspective: 1000px;
+            }
+            
+            .gallery-item {
+                height: 200px;
+                animation: none;
+            }
+            
+            .gallery-item:hover {
+                transform: translateZ(20px) scale(1.05);
+            }
+        }
+
+        /* 智慧农业监控样式 */
+        .smart-farm-monitor {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .monitor-data-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .monitor-data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .data-item i {
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        .data-item .label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .data-item .value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .monitor-controls-panel {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(76, 175, 80, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .monitor-status-bar {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .status-item.active {
+            color: #4CAF50;
+        }
+
+        .status-item i {
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .monitor-data-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .monitor-controls-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        /* 通知样式 */
+        .monitor-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .monitor-notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="imgs/logo.jpg" alt="绿韵农创集萃园">
+                <h1>绿韵农创集萃园</h1>
+            </div>
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a href="index.html"><i class="fas fa-home"></i>首页</a></li>
+                    <li class="navbar-item"><a href="about.html"><i class="fas fa-info-circle"></i>关于我们</a></li>
+                    <li class="navbar-item"><a href="services.html"><i class="fas fa-seedling"></i>产品服务</a></li>
+                    <li class="navbar-item"><a href="shop.html"><i class="fas fa-shopping-cart"></i>线上商城</a></li>
+                    <li class="navbar-item"><a href="virtual_farm.html" class="active"><i class="fas fa-tractor"></i>虚拟农田</a></li>
+                    <li class="navbar-item"><a href="activities.html"><i class="fas fa-calendar-alt"></i>活动体验</a></li>
+                    <li class="navbar-item"><a href="news.html"><i class="fas fa-newspaper"></i>新闻资讯</a></li>
+                    <li class="navbar-item"><a href="contact.html"><i class="fas fa-envelope"></i>联系我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="virtual-farm">
+            <div class="farm-header">
+                <h1>虚拟农田</h1>
+                <p>远程管理您的专属农田，体验智慧农业的魅力</p>
+            </div>
+
+            <!-- 农田监控状态 -->
+            <div class="monitor-status">
+                <div class="status-badge online">
+                    <i class="fas fa-circle"></i>
+                    <span>在线</span>
+                </div>
+                <div class="last-update">
+                    <i class="fas fa-clock"></i>
+                    <span>最后更新: 2分钟前</span>
+                </div>
+            </div>
+
+            <!-- 实时监控和环境数据 -->
+            <div class="farm-dashboard">
+                <!-- 左侧实时画面 -->
+                <div class="live-monitor">
+                    <h2><i class="fas fa-video"></i> 实时画面</h2>
+                    <div class="monitor-screen">
+                        <div class="monitor-slideshow">
+                            <div class="smart-farm-monitor active monitor-slide">
+                                <div class="monitor-data-overlay">
+                                    <div class="monitor-data-grid">
+                                        <div class="data-item">
+                                            <i class="fas fa-temperature-high"></i>
+                                            <span class="label">温度</span>
+                                            <span class="value">26.5°C</span>
+                                        </div>
+                                        <div class="data-item">
+                                            <i class="fas fa-tint"></i>
+                                            <span class="label">湿度</span>
+                                            <span class="value">65%</span>
+                                        </div>
+                                        <div class="data-item">
+                                            <i class="fas fa-sun"></i>
+                                            <span class="label">光照</span>
+                                            <span class="value">856 lux</span>
+                                        </div>
+                                        <div class="data-item">
+                                            <i class="fas fa-wind"></i>
+                                            <span class="label">CO2</span>
+                                            <span class="value">450ppm</span>
+                                        </div>
+                                    </div>
+                                    <div class="monitor-controls-panel">
+                                        <button class="control-btn" onclick="toggleIrrigation()">
+                                            <i class="fas fa-faucet"></i>
+                                            智能灌溉
+                                        </button>
+                                        <button class="control-btn" onclick="toggleVentilation()">
+                                            <i class="fas fa-fan"></i>
+                                            通风系统
+                                        </button>
+                                        <button class="control-btn" onclick="toggleLighting()">
+                                            <i class="fas fa-lightbulb"></i>
+                                            补光系统
+                                        </button>
+                                    </div>
+                                    <div class="monitor-status-bar">
+                                        <div class="status-item active">
+                                            <i class="fas fa-video"></i>
+                                            <span>摄像头1正常</span>
+                                        </div>
+                                        <div class="status-item active">
+                                            <i class="fas fa-wifi"></i>
+                                            <span>网络连接正常</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <i class="fas fa-robot"></i>
+                                            <span>智能系统运行中</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src="imgs/farm-view-1.jpg" alt="智慧农业示范区实时画面" 
+                                    onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/20ba0f25aa6a635d1b08869f0c27aab.jpg';">
+                            </div>
+                            <img src="imgs/farm-view-2.jpg" alt="有机蔬菜种植区实时画面" class="monitor-slide"
+                                onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/fb49cda087e737aac04a3b25b352d90.jpg';">
+                            <img src="imgs/farm-view-3.jpg" alt="果树种植区实时画面" class="monitor-slide"
+                                onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/65f23d520716d1a07bede6a8e3e2394.jpg';">
+                            <img src="imgs/farm-view-4.jpg" alt="生态养殖区实时画面" class="monitor-slide"
+                                onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/fe4e3c72190c2810206323bd4b75d37.jpg';">
+                            <img src="imgs/farm-view-5.jpg" alt="农业科技展示区实时画面" class="monitor-slide"
+                                onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/6a4b07f91743a63d28c3e54e5ceb18c.jpg';">
+                        </div>
+                        <div class="monitor-overlay">
+                            <div class="monitor-info">
+                                <span class="monitor-location">智慧农业示范区</span>
+                                <span class="monitor-time"></span>
+                            </div>
+                            <div class="monitor-controls">
+                                <button class="monitor-btn prev"><i class="fas fa-chevron-left"></i></button>
+                                <div class="monitor-indicators"></div>
+                                <button class="monitor-btn next"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧环境数据 -->
+                <div class="env-data">
+                    <h2><i class="fas fa-leaf"></i> 环境数据</h2>
+                    <div class="data-grid">
+                        <div class="data-card">
+                            <i class="fas fa-temperature-high"></i>
+                            <h3>温度</h3>
+                            <p class="value">26°C</p>
+                            <span class="status normal">正常</span>
+                        </div>
+                        <div class="data-card">
+                            <i class="fas fa-tint"></i>
+                            <h3>湿度</h3>
+                            <p class="value">65%</p>
+                            <span class="status normal">正常</span>
+                        </div>
+                        <div class="data-card">
+                            <i class="fas fa-sun"></i>
+                            <h3>光照</h3>
+                            <p class="value">强</p>
+                            <span class="status normal">正常</span>
+                        </div>
+                        <div class="data-card">
+                            <i class="fas fa-water"></i>
+                            <h3>土壤湿度</h3>
+                            <p class="value">适中</p>
+                            <span class="status normal">正常</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 农田管理控制面板 -->
+            <div class="farm-controls">
+                <h2><i class="fas fa-sliders-h"></i> 农田管理</h2>
+                <div class="control-grid">
+                    <div class="control-card">
+                        <i class="fas fa-faucet"></i>
+                        <h3>浇水</h3>
+                        <span class="status normal">正常</span>
+                        <button class="control-btn">控制</button>
+                    </div>
+                    <div class="control-card">
+                        <i class="fas fa-seedling"></i>
+                        <h3>施肥</h3>
+                        <span class="status warning">待施肥</span>
+                        <button class="control-btn">控制</button>
+                    </div>
+                    <div class="control-card">
+                        <i class="fas fa-cut"></i>
+                        <h3>除草</h3>
+                        <span class="status normal">正常</span>
+                        <button class="control-btn">控制</button>
+                    </div>
+                    <div class="control-card">
+                        <i class="fas fa-wheat-awn"></i>
+                        <h3>收获</h3>
+                        <span class="status waiting">未到时间</span>
+                        <button class="control-btn" disabled>控制</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 农田实景展示 -->
+            <section class="farm-gallery">
+                <h2 class="section-title"><i class="fas fa-images"></i> 农田实景</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="imgs/farm-view-1.jpg" alt="农田实景1" 
+                            onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/20ba0f25aa6a635d1b08869f0c27aab.jpg';">
+                        <div class="gallery-overlay">
+                            <h3>智慧农业示范区</h3>
+                            <p>采用现代化技术进行农作物管理</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/farm-view-2.jpg" alt="农田实景2" 
+                            onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/fb49cda087e737aac04a3b25b352d90.jpg';">
+                        <div class="gallery-overlay">
+                            <h3>有机蔬菜种植区</h3>
+                            <p>无污染绿色种植环境</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/farm-view-3.jpg" alt="农田实景3" 
+                            onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/65f23d520716d1a07bede6a8e3e2394.jpg';">
+                        <div class="gallery-overlay">
+                            <h3>果树种植区</h3>
+                            <p>优质水果培育基地</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/farm-view-4.jpg" alt="农田实景4" 
+                            onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/fe4e3c72190c2810206323bd4b75d37.jpg';">
+                        <div class="gallery-overlay">
+                            <h3>生态养殖区</h3>
+                            <p>绿色生态养殖基地</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="imgs/farm-view-5.jpg" alt="农田实景5" 
+                            onerror="this.onerror=null; this.src='d:/哔哩哔哩/微信/WeChat Files/wxid_cq9c6uxv6yro22/FileStorage/Temp/6a4b07f91743a63d28c3e54e5ceb18c.jpg';">
+                        <div class="gallery-overlay">
+                            <h3>农业科技展示区</h3>
+                            <p>现代农业科技应用示范</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- AI 助手对话窗口 -->
+        <div class="chat-widget">
+            <div class="chat-button" onclick="toggleChat()">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="chat-window" id="chatWindow">
+                <!-- 聊天窗口内容 -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // 智慧农业监控系统功能
+        function updateMonitorData() {
+            // 模拟实时数据更新
+            const randomTemp = (25 + Math.random() * 3).toFixed(1);
+            const randomHumidity = Math.floor(60 + Math.random() * 10);
+            const randomLight = Math.floor(800 + Math.random() * 200);
+            const randomCO2 = Math.floor(400 + Math.random() * 100);
+
+            document.querySelector('.data-item:nth-child(1) .value').textContent = `${randomTemp}°C`;
+            document.querySelector('.data-item:nth-child(2) .value').textContent = `${randomHumidity}%`;
+            document.querySelector('.data-item:nth-child(3) .value').textContent = `${randomLight} lux`;
+            document.querySelector('.data-item:nth-child(4) .value').textContent = `${randomCO2}ppm`;
+        }
+
+        // 更新系统时间
+        function updateSystemTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('zh-CN');
+            document.querySelector('.monitor-time').textContent = timeString;
+        }
+
+        // 控制系统功能
+        function toggleIrrigation() {
+            const btn = event.currentTarget;
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                btn.style.background = 'rgba(76, 175, 80, 0.8)';
+                showNotification('智能灌溉系统已启动');
+            } else {
+                btn.style.background = 'rgba(76, 175, 80, 0.3)';
+                showNotification('智能灌溉系统已关闭');
+            }
+        }
+
+        function toggleVentilation() {
+            const btn = event.currentTarget;
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                btn.style.background = 'rgba(76, 175, 80, 0.8)';
+                showNotification('通风系统已启动');
+            } else {
+                btn.style.background = 'rgba(76, 175, 80, 0.3)';
+                showNotification('通风系统已关闭');
+            }
+        }
+
+        function toggleLighting() {
+            const btn = event.currentTarget;
+            btn.classList.toggle('active');
+            if(btn.classList.contains('active')) {
+                btn.style.background = 'rgba(76, 175, 80, 0.8)';
+                showNotification('补光系统已启动');
+            } else {
+                btn.style.background = 'rgba(76, 175, 80, 0.3)';
+                showNotification('补光系统已关闭');
+            }
+        }
+
+        // 通知提示
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'monitor-notification';
+            notification.textContent = message;
+            document.querySelector('.monitor-screen').appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // 启动实时监控
+        setInterval(updateMonitorData, 3000); // 每3秒更新一次数据
+        setInterval(updateSystemTime, 1000); // 每秒更新一次时间
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateMonitorData();
+            updateSystemTime();
+        });
+    </script>
+</body>
+</html> 

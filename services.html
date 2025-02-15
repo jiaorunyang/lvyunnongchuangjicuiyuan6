@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品服务 - 绿韵农创集萃园</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .services-container {
+            padding-top: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .service-header h1 {
+            font-size: 36px;
+            color: #2c5530;
+            margin-bottom: 20px;
+        }
+
+        .service-header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .service-section {
+            margin-bottom: 80px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            color: #2c5530;
+            font-size: 28px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2c5530;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 24px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #2c5530;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: #2c5530;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon i {
+            font-size: 30px;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .service-features li i {
+            color: #2c5530;
+            font-size: 14px;
+        }
+
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2c5530;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more:hover {
+            gap: 12px;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .services-container {
+                padding: 80px 20px 40px;
+            }
+
+            .service-section {
+                padding: 30px 20px;
+            }
+
+            .service-header h1 {
+                font-size: 28px;
+            }
+
+            .service-header p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="imgs/logo.jpg" alt="绿韵农创集萃园">
+                <h1>绿韵农创集萃园</h1>
+            </div>
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a href="index.html"><i class="fas fa-home"></i>首页</a></li>
+                    <li class="navbar-item"><a href="about.html"><i class="fas fa-info-circle"></i>关于我们</a></li>
+                    <li class="navbar-item"><a href="services.html" class="active"><i class="fas fa-seedling"></i>产品服务</a></li>
+                    <li class="navbar-item"><a href="shop.html"><i class="fas fa-shopping-cart"></i>线上商城</a></li>
+                    <li class="navbar-item"><a href="virtual_farm.html"><i class="fas fa-tractor"></i>虚拟农田</a></li>
+                    <li class="navbar-item"><a href="activities.html"><i class="fas fa-calendar-alt"></i>活动体验</a></li>
+                    <li class="navbar-item"><a href="news.html"><i class="fas fa-newspaper"></i>新闻资讯</a></li>
+                    <li class="navbar-item"><a href="contact.html"><i class="fas fa-envelope"></i>联系我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="services-container">
+            <div class="service-header">
+                <h1>产品与服务</h1>
+                <p>绿韵农创集萃园致力于为您提供优质的有机农产品和丰富的农耕体验，让您感受自然，享受健康生活</p>
+            </div>
+
+            <!-- 有机农产品 -->
+            <section class="service-section">
+                <h2 class="section-title">
+                    <i class="fas fa-leaf"></i>
+                    有机农产品
+                </h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="imgs/organic-vegetables.jpg" alt="有机蔬菜" 
+                                onerror="this.onerror=null; this.src='https://img.freepik.com/free-photo/fresh-organic-vegetables-basket_23-2148896799.jpg';">
+                        </div>
+                        <h3>有机蔬菜</h3>
+                        <p>严格遵循有机种植标准，不使用化学肥料和农药，确保产品的品质和安全。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>有机菠菜</li>
+                            <li><i class="fas fa-check"></i>有机生菜</li>
+                            <li><i class="fas fa-check"></i>有机西红柿</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="imgs/organic-fruits.jpg" alt="有机水果" 
+                                onerror="this.onerror=null; this.src='https://img.freepik.com/free-photo/fresh-organic-fruits-basket_23-2148896804.jpg';">
+                        </div>
+                        <h3>有机水果</h3>
+                        <p>精选时令有机水果，口感鲜美，营养丰富，自然生长。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>有机苹果</li>
+                            <li><i class="fas fa-check"></i>有机梨</li>
+                            <li><i class="fas fa-check"></i>有机葡萄</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="imgs/organic-meat.jpg" alt="有机肉类" 
+                                onerror="this.onerror=null; this.src='https://img.freepik.com/free-photo/fresh-meat-products_23-2148896816.jpg';">
+                        </div>
+                        <h3>有机肉类</h3>
+                        <p>来自有机养殖，确保无激素、无抗生素残留，健康安全。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>有机猪肉</li>
+                            <li><i class="fas fa-check"></i>有机牛肉</li>
+                            <li><i class="fas fa-check"></i>有机鸡肉</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 农耕体验服务 -->
+            <section class="service-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tractor"></i>
+                    农耕体验服务
+                </h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>种植体验</h3>
+                        <p>亲自参与种植过程，从播种到收获，体验农耕的乐趣。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>专业指导</li>
+                            <li><i class="fas fa-check"></i>工具提供</li>
+                            <li><i class="fas fa-check"></i>全程陪伴</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <h3>收获体验</h3>
+                        <p>亲自采摘成熟的农产品，感受丰收的喜悦。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>时令采摘</li>
+                            <li><i class="fas fa-check"></i>品质保证</li>
+                            <li><i class="fas fa-check"></i>现场加工</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>亲子农耕</h3>
+                        <p>家长和孩子一起参与农耕活动，增强亲子间的互动和情感联系。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>寓教于乐</li>
+                            <li><i class="fas fa-check"></i>安全保障</li>
+                            <li><i class="fas fa-check"></i>趣味活动</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 农业教育服务 -->
+            <section class="service-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    农业教育服务
+                </h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>有机农业讲座</h3>
+                        <p>定期举办有机农业知识讲座，传授有机农业理念和技术。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>专家授课</li>
+                            <li><i class="fas fa-check"></i>实践指导</li>
+                            <li><i class="fas fa-check"></i>经验分享</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>种植工作坊</h3>
+                        <p>在专业指导下学习有机种植技术，掌握种植要领。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>小班教学</li>
+                            <li><i class="fas fa-check"></i>实操训练</li>
+                            <li><i class="fas fa-check"></i>技术指导</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>科技体验日</h3>
+                        <p>展示现代农业科技，体验智能农业的魅力。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>智能灌溉</li>
+                            <li><i class="fas fa-check"></i>无人机植保</li>
+                            <li><i class="fas fa-check"></i>数据监测</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 休闲与娱乐服务 -->
+            <section class="service-section">
+                <h2 class="section-title">
+                    <i class="fas fa-umbrella-beach"></i>
+                    休闲与娱乐服务
+                </h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>休闲农场</h3>
+                        <p>在农场内放松身心，享受自然美景。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>观景休憩</li>
+                            <li><i class="fas fa-check"></i>农场漫步</li>
+                            <li><i class="fas fa-check"></i>自然摄影</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>田园诗会音乐节</h3>
+                        <p>在田园中欣赏音乐，感受自然与艺术的结合。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>现场演出</li>
+                            <li><i class="fas fa-check"></i>诗歌朗诵</li>
+                            <li><i class="fas fa-check"></i>艺术展览</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>农园星光夜</h3>
+                        <p>在夜晚的农场中欣赏星空，享受宁静的夜晚。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>星空观测</li>
+                            <li><i class="fas fa-check"></i>篝火晚会</li>
+                            <li><i class="fas fa-check"></i>夜间导览</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 线上服务 -->
+            <section class="service-section">
+                <h2 class="section-title">
+                    <i class="fas fa-mobile-alt"></i>
+                    线上服务
+                </h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                        <h3>微信小程序</h3>
+                        <p>通过微信小程序，随时随地享受便捷服务。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>在线预订</li>
+                            <li><i class="fas fa-check"></i>活动报名</li>
+                            <li><i class="fas fa-check"></i>农产品追溯</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>远程操控</h3>
+                        <p>通过手机远程操控虚拟农田，实时了解农作物生长情况。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>实时监控</li>
+                            <li><i class="fas fa-check"></i>远程管理</li>
+                            <li><i class="fas fa-check"></i>数据分析</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>线上商城</h3>
+                        <p>在社交媒体平台上购买园内有机产品，享受便捷购物体验。</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i>抖音商城</li>
+                            <li><i class="fas fa-check"></i>快速配送</li>
+                            <li><i class="fas fa-check"></i>售后保障</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- AI 助手对话窗口 -->
+        <div class="chat-widget">
+            <div class="chat-button" onclick="toggleChat()">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="chat-window" id="chatWindow">
+                <!-- 聊天窗口内容 -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

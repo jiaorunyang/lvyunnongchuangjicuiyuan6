@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 绿韵农创集萃园</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="imgs/logo.jpg" alt="绿韵农创集萃园">
+                <h1>绿韵农创集萃园</h1>
+            </div>
+            <nav class="navbar">
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a href="index.html"><i class="fas fa-home"></i>首页</a></li>
+                    <li class="navbar-item"><a href="about.html"><i class="fas fa-info-circle"></i>关于我们</a></li>
+                    <li class="navbar-item"><a href="services.html"><i class="fas fa-seedling"></i>产品服务</a></li>
+                    <li class="navbar-item"><a href="shop.html"><i class="fas fa-shopping-cart"></i>线上商城</a></li>
+                    <li class="navbar-item"><a href="virtual_farm.html"><i class="fas fa-tractor"></i>虚拟农田</a></li>
+                    <li class="navbar-item"><a href="activities.html"><i class="fas fa-calendar-alt"></i>活动体验</a></li>
+                    <li class="navbar-item"><a href="news.html"><i class="fas fa-newspaper"></i>新闻资讯</a></li>
+                    <li class="navbar-item"><a href="contact.html" class="active"><i class="fas fa-envelope"></i>联系我们</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="contact-page">
+            <div class="page-header">
+                <h2>联系我们</h2>
+                <p>欢迎通过以下方式与我们取得联系，期待您的反馈！</p>
+            </div>
+
+            <div class="contact-container">
+                <!-- 联系信息部分 -->
+                <section class="contact-info">
+                    <h3>联系方式</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <h4>电话咨询</h4>
+                            <p>123-4567-8900</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <h4>电子邮箱</h4>
+                            <p>info@lvyun.com</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>详细地址</h4>
+                            <p>某某市某某区某某路123号</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 留言表单部分 -->
+                <section class="contact-form">
+                    <h3>在线留言</h3>
+                    <form id="messageForm" class="message-form">
+                        <div class="form-group">
+                            <label for="name">您的姓名</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">您的邮箱</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言内容</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            提交留言
+                        </button>
+                    </form>
+                </section>
+
+                <!-- 社交媒体部分 -->
+                <section class="social-media">
+                    <h3>关注我们</h3>
+                    <div class="social-grid">
+                        <div class="social-item douyin">
+                            <i class="fab fa-tiktok"></i>
+                            <div class="social-info">
+                                <h4>抖音号</h4>
+                                <p>@绿韵农创</p>
+                            </div>
+                        </div>
+                        <div class="social-item wechat">
+                            <i class="fab fa-weixin"></i>
+                            <div class="social-info">
+                                <h4>微信公众号</h4>
+                                <p>绿韵农创集萃园</p>
+                            </div>
+                        </div>
+                        <div class="social-item xiaohongshu">
+                            <i class="fas fa-heart"></i>
+                            <div class="social-info">
+                                <h4>小红书</h4>
+                                <p>@绿韵农创</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 地图部分 -->
+            <section class="map-section">
+                <h3>位置导航</h3>
+                <div class="map-container">
+                    <!-- 这里可以嵌入实际的地图，例如百度地图或高德地图 -->
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>地图加载中...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
